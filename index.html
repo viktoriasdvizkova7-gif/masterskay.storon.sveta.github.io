@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Мастерская «Стороны Света»</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+  :root {
+  --beige: #f5e9d8;
+  --powder: #f1d9d0;
+  --taupe: #d3c4b1;
+  --terracotta: #c97a6d;
+  --dark-burgundy: #5d2e3b;
+  --text-dark: #4a3a33;
+  --shadow: rgba(93, 46, 59, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Crimson Text', serif;
+  background: linear-gradient(135deg, var(--powder), var(--taupe));
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--dark-burgundy);
+}
+
+button, .btn {
+  font-family: 'Crimson Text', serif;
+  font-weight: 600;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  background: var(--terracotta);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  min-width: 120px;
+}
+
+button:hover, .btn:hover {
+  background: var(--dark-burgundy);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px var(--shadow);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ .container {
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+section {
+  padding: 50px 0;
+}
+
+header {
+  background: var(--beige);
+  padding: 16px 0;
+  position: relative;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.header-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--dark-burgundy);
+  font-weight: 700;
+}
+
+.promo-banner {
+  background: var(--powder);
+  border-left: 4px solid var(--terracotta);
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--dark-burgundy);
+  border-radius: 0 8px 8px 0;
+  max-width: 100%;
+  text-align: center;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+
+.cart-icon {
+  position: relative;
+  font-size: 1.6rem;
+  color: var(--dark-burgundy);
+  cursor: pointer;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--terracotta);
+  color: white;
+  font-size: 0.75rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.categories {
+  background: var(--taupe);
+  padding: 16px 0;
+  text-align: center;
+}
+
+.categories-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.category-item {
+  padding: 10px 16px;
+  background: var(--beige);
+  border-radius: 30px;
+  font-weight: 600;
+  color: var(--dark-burgundy);
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 32px;
+  font-size: 1.8rem;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.product-card {
+  background: var(--beige);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--shadow);
+  overflow: hidden;
+}
+
+/* Стили для слайдера в карточке товара */
+.slider-container {
+  position: relative;
+  width: 100%;
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--taupe);
+  overflow: hidden;
+}
+
+.slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+.slider-image.active {
+  display: block;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none !important;     /* Убран фон */
+  border: none !important;         /* Убрана рамка */
+  width: auto !important;          /* Автоматическая ширина */
+  height: auto !important;         /* Автоматическая высота */
+  padding: 0 !important;           /* Убраны внутренние отступы */
+  margin: 0 !important;            /* Убраны внешние отступы */
+  outline: none !important;        /* Убрана возможная обводка при фокусе */
+  box-shadow: none !important;     /* Убрана тень */
+  cursor: pointer;
+  font-size: 20px !important;      /* Размер стрелок */
+  color: white !important;         /* Цвет стрелок */
+  z-index: 10;
+  opacity: 0.7;                   /* Полупрозрачные */
+  transition: opacity 0.3s, color 0.3s;
+  /* Убраны border-radius, width, height, и фоны */
+}
+
+.slider-btn:hover {
+  opacity: 1;                     /* Полностью видимые при наведении */
+  color: #f0d9ce !important;      /* Можно выбрать другой цвет при наведении */
+}
+
+.slider-btn.prev { 
+  left: 8px;                      /* Отступ от левого края */
+}
+.slider-btn.next { 
+  right: 8px;                     /* Отступ от правого края */
+}
+
+.slider-indicator {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  z-index: 10;
+}
+
+.product-info {
+  padding: 18px;
+}
+
+.product-title {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+
+.product-price {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--dark-burgundy);
+  margin: 8px 0;
+}
+
+.price-missing {
+  color: var(--terracotta);
+  font-style: italic;
+}
+
+.product-description {
+  margin: 10px 0;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  line-height: 1.5;
+}
+
+.about {
+  background: var(--powder);
+  text-align: center;
+}
+
+.about-text {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.25rem;
+  line-height: 1.8;
+  padding: 0 8px;
+}
+
+.about-text p {
+  margin-bottom: 16px;
+}
+
+.custom-note {
+  background: var(--powder);
+  border-left: 4px solid var(--terracotta);
+  padding: 16px;
+  margin: 24px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--dark-burgundy);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.advantages {
+  background: var(--beige);
+}
+
+.advantages-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.advantage-card {
+  background: var(--powder);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.contact {
+  background: var(--taupe);
+  text-align: center;
+  padding: 48px 0;
+}
+
+.contact-text {
+  margin-bottom: 24px;
+  font-size: 1.1rem;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.social-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--dark-burgundy);
+  text-decoration: none;
+  min-width: 80px;
+}
+
+.social-item i {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+}
+
+.social-item span {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.social-item:hover i,
+.social-item:hover span {
+  color: var(--terracotta);
+}
+
+.cart-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.cart-content {
+  background: var(--beige);
+  width: 100%;
+  max-width: 500px;
+  padding: 28px;
+  border-radius: 16px;
+  position: relative;
+}
+
+.close-cart {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--dark-burgundy);
+}
+
+.cart-items {
+  margin-bottom: 20px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--taupe);
+}
+
+.cart-total {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 16px 0;
+}
+
+.order-form {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.form-group input, .form-group textarea {
+  padding: 12px;
+  border: 1px solid var(--taupe);
+  border-radius: 8px;
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+}
+
+.form-message {
+  text-align: center;
+  font-weight: bold;
+  color: var(--terracotta);
+  margin-top: 16px;
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .header-inner {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+
+  .advantages-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+}
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-inner">
+      <div class="logo">Мастерская «Стороны Света»</div>
+      <div class="promo-banner">
+        Цветовую палитру свечей вы можете корректировать, связавшись с нашими мастерами, а также заказывать индивидуальные наборы на любимую тематику, фильм, книгу или мультфильм.
+      </div>
+      <div class="cart-icon" id="cartIcon">
+        <i class="fas fa-shopping-bag"></i>
+        <span class="cart-count" id="cartCount">0</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="categories">
+    <div class="container">
+      <div class="categories-list">
+        <a href="#holidays" class="category-item">Праздники</a>
+        <a href="#autumn" class="category-item">Осенние свечи</a>
+        <a href="#winter" class="category-item">Зимние свечи</a>
+        <a href="#cosmetics" class="category-item">Nature Cosmetics</a>
+        <a href="#amulets" class="category-item">Обереги</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="holidays">
+    <div class="container">
+      <h2 class="section-title">Праздники</h2>
+      <div class="products-grid" id="holidaysGrid"></div>
+    </div>
+  </section>
+
+  <section id="autumn" class="about">
+    <div class="container">
+      <h2 class="section-title">Осенние свечи</h2>
+      <div class="products-grid" id="autumnGrid"></div>
+    </div>
+  </section>
+
+  <section id="winter">
+    <div class="container">
+      <h2 class="section-title">Зимние свечи</h2>
+      <div class="products-grid" id="winterGrid"></div>
+    </div>
+  </section>
+
+  <section id="cosmetics" class="about">
+    <div class="container">
+      <h2 class="section-title">Nature Cosmetics</h2>
+      <div class="products-grid" id="cosmeticsGrid"></div>
+    </div>
+  </section>
+
+  <section id="amulets">
+    <div class="container">
+      <h2 class="section-title">Обереги</h2>
+      <div class="products-grid" id="amuletsGrid"></div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="container">
+      <h2 class="section-title">О мастерской</h2>
+      <div class="about-text">
+        <p>Здесь рождаются свечи, вдохновлённые природой, сезонами и праздниками — каждая расписана вручную и не похожа ни на одну другую.</p>
+        <p>В нашем ассортименте вы найдёте:</p>
+        <p>Авторские свечи сложной формы<br>Ароматические масла<br>Берегини ручной работы<br>И многое другое!</p>
+        <p>А ещё в нашей мастерской вы можете не только подобрать идеальный подарок или что-то особенное для себя, но и заказать у нашего мастера-таролога индивидуальный прогноз или расклад — и всё это по очень привлекательной стоимости!</p>
+        <p><em>Данное предложение опубликовано в развлекательных целях.</em></p>
+        <p>Приходите — окунитесь в атмосферу тепла и вдохновения!</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="advantages">
+    <div class="container">
+      <h2 class="section-title">Почему выбирают нас?</h2>
+      <div class="advantages-grid">
+        <div class="advantage-card">Ручная роспись каждой свечи</div>
+        <div class="advantage-card">Натуральные воски: соевый, кокосовый, стеариновый</div>
+        <div class="advantage-card">Хлопковые фитили</div>
+        <div class="advantage-card">Ароматы на основе натуральных эфирных масел</div>
+        <div class="advantage-card">Экологичность и безопасность</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact">
+    <div class="container">
+      <h2 class="section-title">Связаться с нами</h2>
+      <div class="contact-text">
+        <p>Пн–Пт с 9:00 до 21:00<br>Сб–Вс — выходной</p>
+      </div>
+      <div class="social-links">
+        <a href="https://vk.com/storonysvetashop?from=groups" target="_blank" class="social-item">
+          <i class="fab fa-vk"></i>
+          <span>ВКонтакте</span>
+        </a>
+        <a href="https://market.yandex.ru/cc/7qWwtN" target="_blank" class="social-item">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Яндекс.Маркет</span>
+        </a>
+        <a href="https://t.me/masterskaystoronsveta" target="_blank" class="social-item">
+          <i class="fab fa-telegram"></i>
+          <span>Telegram</span>
+        </a>
+        <a href="https://chat.whatsapp.com/LlRmLmrMDiI34Vl9viKf5C?mode=wwt" target="_blank" class="social-item">
+          <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="cart-modal" id="cartModal">
+    <div class="cart-content">
+      <button class="close-cart" id="closeCart">&times;</button>
+      <h3>Ваш заказ</h3>
+      <div class="cart-items" id="cartItems"></div>
+      <div class="cart-total">Итого: <span id="totalPrice">0</span> ₽</div>
+      <button id="checkoutBtn">Оформить заказ</button>
+
+      <div class="order-form" id="orderForm">
+        <div class="form-group">
+          <label>ФИО *</label>
+          <input type="text" id="fullName" required>
+        </div>
+        <div class="form-group">
+          <label>Телефон *</label>
+          <input type="tel" id="phone" placeholder="+7 ___ ___-__-__" required>
+        </div>
+        <div class="form-group">
+          <label>Адрес доставки *</label>
+          <textarea id="address" rows="3" required></textarea>
+        </div>
+        <button id="confirmOrder">Подтвердить заказ</button>
+        <div class="form-message" id="orderMessage">Спасибо! Менеджер свяжется с вами в ближайшее время.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- МАССИВ ТОВАРОВ С ФОТО ---
+    const products = {
+      holidays: [
+        {
+          id: 'h1',
+          name: 'Кошмары Тима Бертона',
+          price: 2500,
+          description: 'Свечи с мрачной эстетикой в стиле Тима Бертона: тёмные тона, изящные силуэты. Идеальны для Хеллоуина и атмосферных вечеров.',
+          images: ['img/tim1.jpg', 'img/tim2.jpg'] // <-- Добавьте сюда свои фото
+        },
+        {
+          id: 'h2',
+          name: 'Мрак Хеллоуина',
+          price: 2500,
+          description: 'Тёмно-фиолетовы свечи с готическими узорами. Созданы для тех, кто любит мистику.',
+          images: ['img/mrak1.jpg', 'img/mrak2.jpg']       },
+        {
+          id: 'h3',
+          name: 'Тыквы Джека',
+          price: 550,
+          description: 'Маленькие свечи в форме улыбающихся тыкв с расписной столовой свечой. Идеальный акцент для домашнего Хеллоуина.',
+          images: ['img/tkvdgeka1.jpg', 'img/tkvdgeka2.jpg']
+        },
+        {
+          id: 'h4',
+          name: 'Тьма Леса',
+          price: 500,
+          description: 'Свечи насыщенного оранжевого цвета в виде мухомора и тыкв. Вдохновлены тайнами старых лесов.',
+          images: ['img/tmalesa1.jpg', 'img/tmalesa2.jpg']
+        },
+        {
+          id: 'h5',
+          name: 'Симфония нежности MAXI',
+          price: 4500,
+          description: 'Букет цветов в подарочной коробке. В комментариях к заказу обязательно укажите желаемую цветовую гамму.',
+          images: ['img/simmax1.jpg', 'img/simmax2.jpg']
+        },
+        {
+          id: 'h6',
+          name: 'Симфония нежности MINI',
+          price: 550,
+          description: 'Букет цветов в тишью. В комментариях к заказу обязательно укажите желаемую цветовую гамму.',
+          images: ['img/simfmini1.jpg', 'img/simfmini2.jpg']
+        },
+        {
+          id: 'h7',
+          name: 'Симфония лепестков',
+          price: 250,
+          description: 'Свечная композиция в тишью. В комментариях к заказу обязательно укажите желаемую цветовую гамму.',
+          images: ['img/simflep1.jpg', 'img/simflep1.jpg']
+        },
+        {
+          id: 'h8',
+          name: 'Мара и Морок',
+          price: 2500,
+          description: 'Набор созданный в тематике серии книг "Мара и Морок".',
+          images: ['img/maraimorok1.jpg', 'img/maraimorok2.jpg']
+        }
+      ],
+      autumn: [
+        {
+          id: 'a1',
+          name: 'Дары Леса',
+          price: 690,
+          description: 'Свечи с ароматом свежего леса: грибов, опавших листьев и мха. Цвета — тёплый красный, охра и коричневый. Идеально для осеннего уюта.',
+          images: ['img/darlesa1.jpg', 'img/darlesa2.jpg']
+        },
+        {
+          id: 'a2',
+          name: 'Дабл Баббл',
+          price: 850,
+          description: 'Набор в модном дизайне и ярких цветах.',
+          images: ['img/dabl1.jpg', 'img/dabl2.jpg']
+        },
+        {
+          id: 'a3',
+          name: 'Осенний иней',
+          price: 550,
+          description: 'Свечи с эффектом «инея» — золотой глиттер на белом фоне.',
+          images: ['img/inei1.jpg', 'img/inei2.jpg']
+        },
+        {
+          id: 'a4',
+          name: 'Краски осени',
+          price: 750,
+          description: 'Свечи в градиенте от оранжевого к тёплому коричневому.',
+          images: ['img/kroseni1.jpg', 'img/kroseni2.jpg']
+        }
+      ],
+      winter: [
+        {
+          id: 'w1',
+          name: 'Коробка с мандаринами',
+          price: 450,
+          description: 'Свечи в форме коробки с ароматными сладкими мандаринами.',
+          images: ['img/krmandarin1.jpg', 'img/krmandarin2.jpg']
+        },
+        {
+          id: 'w2',
+          name: 'Сияющий набор MAXI',
+          price: 1250,
+          description: 'Шесть свечей в виде ёлочных игрушек. Идеальны для новогоднего настроения.',
+          images: ['img/siyhmax1.jpg', 'img/siyhmax2.jpg']
+        },
+        {
+          id: 'w3',
+          name: 'Сияющий набор MINI',
+          price: 600,
+          description: 'Набор из трёх ёлочных свечей. В комментариях к заказу обязательно укажите цветовую гамму (фото1/фото2).',
+          images: ['img/siyhmini1.jpg', 'img/siyhmini2.jpg']
+        },
+        {
+          id: 'w4',
+          name: 'Набор свечей "Морозко"',
+          price: 550,
+          description: 'Две ёлочные игрушки и прекрасная белоснежная шишка.',
+          images: ['img/morozko1.jpg', 'img/morozko2.jpg']
+        },
+        {
+          id: 'w5',
+          name: 'Набор свечей "Самоцветы"',
+          price: 550,
+          description: 'Две ёлочные игрушки и шишка с золотым покрытием.',
+          images: ['img/samocvet1.jpg', 'img/samocvet2.jpg']
+        },
+        {
+          id: 'w6',
+          name: 'Набор свечей "Новогодняя гирлянда"',
+          price: 350,
+          description: 'Набор из двух столовых свечей в Новогодней стилистике.',
+          images: ['img/novgirl1.jpg', 'img/novgirl2.jpg']
+        },
+        {
+          id: 'w7',
+          name: 'Новогоднее искусство',
+          price: 450,
+          description: 'На выбор один ёлочный шарик расписанный вручную на тематику зимней сказки. Идеально для создания атмосферы праздника.',
+          images: ['img/noviskustvo1.jpg', 'img/noviskustvo2.jpg']
+        },
+        {
+          id: 'w8',
+          name: 'Новогоднее искусство',
+          price: 650,
+          description: 'Новогодний шарик выполненный именно по вашему запросы. Свяжитесь с нами для обсуждения эскиза.',
+          images: ['img/noviskustvo6501.jpg', 'img/noviskustvo6502.jpg']
+        }
+      ],
+      cosmetics: [
+        {
+          id: 'c1',
+          name: 'Масло «Афродита»',
+          price: 1700,
+          description: 'Твоя тайная сила притяжения. Пробуди внутренняю богиню.',
+          images: ['img/afrodita1.jpg', 'img/afrodita2.jpg']
+        },
+        {
+          id: 'c2',
+          name: 'Масло «Денежный магнит»',
+          price: 1700,
+          description: 'Притяни поток изобилия и финансовую удачу.',
+          images: ['img/dengi1.jpg', 'img/dengi2.jpg']
+        }
+      ],
+      amulets: [
+        {
+          id: 'am1',
+          name: 'Берегиня Весенна',
+          price: 650,
+          description: 'Оберег-берегиня из натурального воска. Дарит защиту и весеннее обновление.',
+          images: ['img/oberegvesen1.jpg', 'img/oberegvesen2.jpg']
+        },
+        {
+          id: 'am2',
+          name: 'Берегиня Мара',
+          price: 650,
+          description: 'Оберег-берегиня в стиле славянской мифологии.',
+          images: ['img/oberegmara1.jpg', 'img/oberegmara2.jpg']
+        }
+      ]
+    };
+
+    let cart = [];
+    const cartCountEl = document.getElementById('cartCount');
+    const cartItemsEl = document.getElementById('cartItems');
+    const totalPriceEl = document.getElementById('totalPrice');
+
+    function updateCart() {
+      cartCountEl.textContent = cart.length;
+      renderCartItems();
+    }
+
+    function renderCartItems() {
+      cartItemsEl.innerHTML = '';
+      let total = 0;
+      cart.forEach((item, index) => {
+        if (item.price !== null && item.price !== undefined) {
+          total += item.price;
+          const div = document.createElement('div');
+          div.className = 'cart-item';
+          div.innerHTML = `
+            <span>${item.name}</span>
+            <span>${item.price} ₽ <button onclick="removeFromCart(${index})">×</button></span>
+          `;
+          cartItemsEl.appendChild(div);
+        }
+      });
+      totalPriceEl.textContent = total;
+    }
+
+    function addToCart(product) {
+      if (product.price !== null && product.price !== undefined) {
+        cart.push(product);
+        updateCart();
+      }
+    }
+
+    window.removeFromCart = function(index) {
+      cart.splice(index, 1);
+      updateCart();
+    };
+
+    // --- ФУНКЦИЯ СОЗДАНИЯ СЛАЙДЕРА С ФОТО ---
+    function createImageSlider(images, productName) {
+  const container = document.createElement('div');
+  container.className = 'slider-container';
+
+  if (images && images.length > 0) {
+    images.forEach((imgSrc, i) => {
+      const img = document.createElement('img');
+      img.src = imgSrc;
+      img.alt = productName;
+      img.className = 'slider-image';
+      if (i === 0) img.classList.add('active');
+      container.appendChild(img);
+    });
+
+    // Индикатор слайда (например, "1 из 2")
+    const indicator = document.createElement('div');
+    indicator.className = 'slider-indicator';
+    indicator.textContent = `1 из ${images.length}`;
+    container.appendChild(indicator);
+
+    // Кнопки навигации
+    if (images.length > 1) {
+      const prevBtn = document.createElement('button');
+      prevBtn.className = 'slider-btn prev';
+      prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+      prevBtn.onclick = () => changeSlide(container, -1);
+
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'slider-btn next';
+      nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+      nextBtn.onclick = () => changeSlide(container, 1);
+
+      container.appendChild(prevBtn);
+      container.appendChild(nextBtn);
+    }
+  } else {
+    // Заглушка, если фото нет
+    const placeholder = document.createElement('div');
+    placeholder.className = 'slider-content';
+    placeholder.textContent = `${productName} — фото 1/2`;
+    container.appendChild(placeholder);
+  }
+
+  return container;
+}
+function changeSlide(container, direction) {
+  const images = container.querySelectorAll('.slider-image');
+  const indicator = container.querySelector('.slider-indicator');
+  if (images.length === 0) return;
+
+  let currentIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
+  currentIndex = (currentIndex + direction + images.length) % images.length;
+
+  images.forEach(img => img.classList.remove('active'));
+  images[currentIndex].classList.add('active');
+
+  // Обновляем индикатор
+  indicator.textContent = `${currentIndex + 1} из ${images.length}`;
+}
+
+    let currentSlideIndex = 0;
+
+    function showSlide(slider, direction) {
+      const images = slider.querySelectorAll('.slider-image');
+      if (images.length === 0) return;
+
+      currentSlideIndex = (currentSlideIndex + direction + images.length) % images.length;
+
+      images.forEach((img, i) => {
+        img.classList.toggle('active', i === currentSlideIndex);
+      });
+    }
+
+    function renderProducts(sectionId, productList) {
+      const container = document.getElementById(sectionId + 'Grid');
+      container.innerHTML = '';
+      productList.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+
+        // Создаём слайдер с фото
+        const slider = createImageSlider(product.images, product.name);
+        card.appendChild(slider);
+
+        const info = document.createElement('div');
+        info.className = 'product-info';
+        const priceDisplay = product.price !== null && product.price !== undefined
+          ? `${product.price} ₽`
+          : '<span class="price-missing">Цена по запросу</span>';
+
+        const buttonHtml = product.price !== null && product.price !== undefined
+          ? `<button onclick='addToCart(${JSON.stringify(product).replace(/'/g, "\\'")})'>В корзину</button>`
+          : '';
+
+        info.innerHTML = `
+          <h3 class="product-title">${product.name}</h3>
+          <p class="product-description">${product.description || 'Описание товара.'}</p>
+          <div class="product-price">${priceDisplay}</div>
+          ${buttonHtml}
+        `;
+        card.appendChild(info);
+        container.appendChild(card);
+      });
+    }
+
+    renderProducts('holidays', products.holidays);
+    renderProducts('autumn', products.autumn);
+    renderProducts('winter', products.winter);
+    renderProducts('cosmetics', products.cosmetics);
+    renderProducts('amulets', products.amulets);
+
+    const cartModal = document.getElementById('cartModal');
+    const cartIcon = document.getElementById('cartIcon');
+    const closeCart = document.getElementById('closeCart');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    const orderForm = document.getElementById('orderForm');
+    const confirmOrder = document.getElementById('confirmOrder');
+    const orderMessage = document.getElementById('orderMessage');
+
+    cartIcon.addEventListener('click', () => {
+      cartModal.style.display = 'flex';
+    });
+
+    closeCart.addEventListener('click', () => {
+      cartModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === cartModal) cartModal.style.display = 'none';
+    });
+
+    checkoutBtn.addEventListener('click', () => {
+      orderForm.style.display = 'flex';
+      checkoutBtn.style.display = 'none';
+    });
+
+    document.getElementById('phone').addEventListener('input', function (e) {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length === 0) return;
+      if (value[0] !== '7') value = '7' + value;
+      let formatted = '+7 ';
+      if (value.length > 1) formatted += value.slice(1, 4) + ' ';
+      if (value.length > 4) formatted += value.slice(4, 7) + '-';
+      if (value.length > 7) formatted += value.slice(7, 9) + '-';
+      if (value.length > 9) formatted += value.slice(9, 11);
+      e.target.value = formatted;
+    });
+
+    confirmOrder.addEventListener('click', (e) => {
+      e.preventDefault();
+      const fullName = document.getElementById('fullName').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const address = document.getElementById('address').value.trim();
+
+      if (fullName && phone && address) {
+        orderMessage.style.display = 'block';
+        setTimeout(() => {
+          cart = [];
+          updateCart();
+          orderForm.style.display = 'none';
+          checkoutBtn.style.display = 'block';
+          document.getElementById('fullName').value = '';
+          document.getElementById('phone').value = '';
+          document.getElementById('address').value = '';
+          orderMessage.style.display = 'none';
+          cartModal.style.display = 'none';
+        }, 2000);
+      } else {
+        alert('Пожалуйста, заполните все обязательные поля.');
+      }
+    });
+  </script>
+</body>
+</html>
